@@ -13,10 +13,12 @@ gem "uglifier", ">= 1.3.0"
 gem "coffee-rails", "~> 4.2"
 gem "turbolinks", "~> 5"
 gem "jbuilder", "~> 2.5"
-gem "bcrypt",         "3.1.12"
+gem "bcrypt", "~> 3.1.12"
 gem "bootstrap"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
+gem "font-awesome-sass", "~> 5.8.1"
 gem "mini_racer", platforms: :ruby
+gem "figaro"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
