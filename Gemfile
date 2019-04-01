@@ -17,8 +17,17 @@ gem "bcrypt", "~> 3.1.12"
 gem "bootstrap"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
 gem "font-awesome-sass", "~> 5.8.1"
+gem "faker", "~> 1.9", ">= 1.9.3"
+gem "will_paginate", "~> 3.1", ">= 3.1.7"
+gem "bootstrap-will_paginate", "~> 1.0"
 gem "mini_racer", platforms: :ruby
 gem "figaro"
+gem "carrierwave"
+gem "mini_magick", "4.7.0"
+
+group :production do
+   gem "fog", "1.42"
+end
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

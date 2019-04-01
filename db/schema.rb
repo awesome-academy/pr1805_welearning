@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190325123515) do
+ActiveRecord::Schema.define(version: 20190329121856) do
 
   create_table "answers", force: :cascade do |t|
     t.string "answer_content"
@@ -31,13 +31,23 @@ ActiveRecord::Schema.define(version: 20190325123515) do
     t.index ["lesson_id"], name: "index_attachments_on_lesson_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.integer "buy_times"
     t.float "rate"
     t.integer "price"
+    t.text "description"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id", "created_at"], name: "index_courses_on_category_id_and_created_at"
+    t.index ["category_id"], name: "index_courses_on_category_id"
   end
 
   create_table "excercises", force: :cascade do |t|
@@ -94,7 +104,6 @@ ActiveRecord::Schema.define(version: 20190325123515) do
     t.string "user_name"
     t.string "email"
     t.string "password_digest"
-    t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remember_digest"
@@ -103,6 +112,12 @@ ActiveRecord::Schema.define(version: 20190325123515) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.string "picture"
+    t.string "phone_number"
+    t.string "date_of_birth"
+    t.string "address"
+    t.string "id_card"
+    t.boolean "admin", default: false
   end
 
 end
