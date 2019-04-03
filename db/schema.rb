@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20190405130213) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
-    t.integer "buy_times"
+    t.integer "buy_times", default: 0
     t.float "rate"
     t.integer "price"
     t.text "description"

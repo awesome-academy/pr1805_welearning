@@ -1,8 +1,6 @@
 <tbody>
   <tr>
-    <td><%= course.id %></td>
     <td><%= course.name %></td>
-    <td><%= course.category.tag %></td>
     <td><%= course.rate %></td>
     <td><%= course.price %></td>
     <td><%= course.buy_times %></td>
@@ -10,13 +8,15 @@
       <i class="fas fa-info-circle text-primary"></i>
       <% end %>
     </td>
-    <% if current_user.courses.ids.include? course.id %>
-      <td><i class='fas fa-check-circle text-danger'></i></td>
-    <% else %>
-      <td><%= link_to user_carts_path(current_user, course_id: course.id), method: :post do %>
-        <i class="fas fa-cart-plus text-success"></i>
+    <% if logged_in? %>
+      <% if current_user.courses.include? course %>
+        <td><i class='fas fa-check-circle text-danger'></i></td>
+      <% else %>
+        <td><%= link_to user_carts_path(current_user, course_id: course.id), method: :post do %>
+          <i class="fas fa-cart-plus text-success"></i>
+        <% end %>
+        </td>
       <% end %>
-      </td>
     <% end %>
   </tr>
 </tbody>

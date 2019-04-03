@@ -2,6 +2,7 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   has_many :user_courses, class_name: UserCourse.name
   has_many :users, through: :user_courses
+  has_many :carts, class_name: Cart.name
   belongs_to :category
   scope :popular, -> {order buy_times: :desc}
   scope :newest, -> {order updated_at: :desc}
@@ -18,6 +19,8 @@ class Course < ApplicationRecord
   scope :by_category_ids, -> (category_ids) do
     joins(:category).where "category_id IN (?)", category_ids
   end
+  scope :by_price_lt, -> (price_lt){ where("(courses.price) <= ?", price_lt)}
+  scope :by_price_gt, -> (price_gt){ where("(courses.price) >= ?", price_gt)}
 
   def picture_size
     errors.add(:picture, "should be less than 5MB") if picture.size > 5.megabytes
