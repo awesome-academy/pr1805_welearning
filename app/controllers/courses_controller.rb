@@ -7,4 +7,8 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find_by id: params[:id]
   end
+
+  def course_params
+  	params.require(:course).permit :name, :buy_times, :rate, :price, :description
+  end
 end
