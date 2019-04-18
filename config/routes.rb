@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   end
 
   resources :messages, only: [:create, :index], path: "chat"
+  mount ActionCable.server, at: "/cable"
 
   namespace :admin do
     root "dashboards#index"
