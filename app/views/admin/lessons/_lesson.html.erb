@@ -8,5 +8,7 @@
     <td><%= link_to "Xóa", admin_sname_lesson_path(lesson), method: :delete,
       class: "btn btn-danger btn-sm",
       data: {confirm: "Xác nhận xóa bài giảng #{lesson.lesson_title}."} %></td>
+    <td><%= link_to "Danh sách", admin_excercise_path(@course, @lesson, @excercise),
+      class: "btn btn-info btn-sm"  %></td>
   </tr>
 </tbody>
