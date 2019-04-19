@@ -17,6 +17,7 @@
       <th>Chi tiết</th>
       <th>Chỉnh sửa</th>
       <th>Xóa</th>
+      <th>Bài tập</th>
     </tr>
   </thead>
   <% if @course.lessons.present? %>
@@ -30,3 +31,4 @@
     :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer,
     class: "mt-2 mr-2 pagination-sm d-flex justify-content-end")%>
 <%= link_to "Thêm bài giảng", new_admin_course_lesson_path(@course, @lesson), class: "float-right btn btn-primary btn-sm mr-2 mt-2"%>
+<%= link_to "Thêm Bài tập", new_admin_lesson_excercise_path(@course, @lesson, @excercise), class: "float-right btn btn-primary btn-sm mr-2 mt-2"%>

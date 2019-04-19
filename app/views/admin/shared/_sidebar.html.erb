@@ -57,21 +57,6 @@
     </div>
   </li>
 
-  <li class="nav-item">
-    <%= link_to "#", class: "nav-link collapsed",
-    data: { toggle: :collapse, target: "#collapseUtilities2" },
-    aria: { expanded: true, controls: :collapseUtilities2 } do %>
-      <i class="fas fa-users"></i>
-      <span>Bài tập</span>
-    <% end %>
-    <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities2" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <%= link_to "Danh sách", admin_sname_excercise_path, class: "collapse-item" %>
-        <%= link_to "Tạo mới", new_admin_sname_lesson_excercise_path(@lessons), class: "collapse-item" %>
-        <%= link_to "Khác", "#", class: "collapse-item" %>
-      </div>
-    </div>
-  </li>
   <!-- Divider -->
   <hr class="sidebar-divider">
 

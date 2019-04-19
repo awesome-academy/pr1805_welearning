@@ -35,9 +35,7 @@ Rails.application.routes.draw do
 
     scope shallow_prefix: "sname" do
       resources :courses do
-        resources :lessons, shallow: true do
-          resources :excercises, shallow: true
-        end
+        resources :lessons, shallow: true
       end
     end
 

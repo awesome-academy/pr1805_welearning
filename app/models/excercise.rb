@@ -6,3 +6,4 @@ class Excercise < ApplicationRecord
 
   validates :excercise_name, presence: true
 end
+
