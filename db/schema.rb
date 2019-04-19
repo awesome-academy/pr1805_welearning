@@ -33,8 +33,13 @@ ActiveRecord::Schema.define(version: 20190422120749) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "course_id"
+    t.boolean "paid", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id", "created_at"], name: "index_carts_on_course_id_and_created_at"
+    t.index ["course_id"], name: "index_carts_on_course_id"
+    t.index ["user_id", "course_id"], name: "index_carts_on_user_id_and_course_id", unique: true
     t.index ["user_id", "created_at"], name: "index_carts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
@@ -56,7 +61,7 @@ ActiveRecord::Schema.define(version: 20190422120749) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
-    t.integer "buy_times", default: 0
+    t.integer "buy_times"
     t.float "rate"
     t.integer "price"
     t.text "description"
@@ -129,13 +134,10 @@ ActiveRecord::Schema.define(version: 20190422120749) do
   create_table "user_courses", force: :cascade do |t|
     t.integer "user_id"
     t.integer "course_id"
-    t.integer "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id", "created_at"], name: "index_user_courses_on_course_id_and_created_at"
     t.index ["course_id"], name: "index_user_courses_on_course_id"
     t.index ["user_id", "course_id"], name: "index_user_courses_on_user_id_and_course_id", unique: true
-    t.index ["user_id", "created_at"], name: "index_user_courses_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_user_courses_on_user_id"
   end
 
