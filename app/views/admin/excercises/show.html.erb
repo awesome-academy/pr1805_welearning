@@ -1,0 +1,31 @@
+<% provide :title, excercise.excercise_name %>
+<h1 align="center">
+  <%= @excercise.excercise_name %>
+</h1>
+
+<div class="row">
+  <div class="col-xl-3">
+    <%= link_to "Cập nhật", edit_admin_excercise_path, class: "btn btn-info btn-sm float-right mb-2" %>
+  </div>
+</div>
+
+<table width="95%" align="center" class="table-hover">
+  <thead>
+    <tr>
+      <th>Câu hỏi</th>
+      <th>Câu trả lời</th>
+      <th>Đáp án đúng</th>
+      <th>Xóa</th>
+    </tr>
+  </thead>
+  <% if  %>
+      <ol >
+        <%= render "show" %>
+      </ol>
+  <% end %>
+
+</table>
+  <%= will_paginate(@questions,
+    :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer,
+    class: "mt-2 mr-2 pagination-sm d-flex justify-content-end")%>
+<%= link_to "Thêm Bài tập", new_admin_lesson_excercise_path(@course, @lesson, @excercise), class: "float-right btn btn-primary btn-sm mr-2 mt-2"%>
