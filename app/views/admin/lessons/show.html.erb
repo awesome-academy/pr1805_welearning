@@ -18,6 +18,28 @@
       <% end %>
     <% end %>
   </div>
+
+  <table width="95%" align="center" class="table-hover">
+    <thead>
+      <tr>
+        <th>Bài tập</th>
+        <th>Chi tiết</th>
+        <th>Chỉnh sửa</th>
+        <th>Xóa</th>
+      </tr>
+    </thead>
+    <% if  %>
+        <ol @lesson.excercises.present?>
+          <%= render @excercises %>
+        </ol>
+    <% end %>
+  </table><br>
+
+  <%= will_paginate(@excercises,
+    :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer,
+    class: "mt-2 mr-2 pagination-sm d-flex justify-content-end")%>
+  <%= link_to "Thêm Bài tập", new_admin_lesson_excercise_path( @lesson, @excercise), class: "float-right btn btn-primary btn-sm mr-2 mt-2"%><br>
+
   <div align="center">
     <%= link_to "Thay đổi bài giảng", edit_admin_sname_lesson_path(@lesson),
       class: "btn btn-warning btn-sm" %>

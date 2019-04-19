@@ -1,19 +1,19 @@
 class Admin::ExcercisesController < Admin::BaseController
 
   before_action :load_excercise, only: [:show, :edit, :destroy]
-  # before_action :load_course, only: [:new, :create, :destroy]
+  before_action :load_lesson, only: [:create, :new, :show, :edit, :destroy]
 
-  def show; end
+  def index; end
 
   def new
     @excercise = @lesson.excercises.build
   end
 
   def create
-    @excercise = @lesson.excercises.build excerise_params
+    @excercise = @lesson.excercises.build excercise_params
     if @excercise.save
       flash[:success] = "Tạo bài tập thành công!"
-      redirect_to new_admin_sname_lesson_excercise_path @lesson
+      redirect_to admin_sname_lesson @lesson
     else
       flash[:danger] = "Bạn chưa điền đầy đủ thông tin bài tập"
       render :new
@@ -23,6 +23,7 @@ class Admin::ExcercisesController < Admin::BaseController
   def edit; end
 
   def update
+    @lesson = @excercise.lesson
     if @excercise.update_attributes excercise_params
       flash[:success] = "Cập nhật bài tập thành công!"
       redirect_to admin_lesson_path @lesson
@@ -32,22 +33,21 @@ class Admin::ExcercisesController < Admin::BaseController
   end
 
   def destroy
-    @lesson.destroy
+    @excercise.destroy
     flash[:danger] = "Xóa bài tập thành công!"
     redirect_to admin_lesson_path @excercise.lesson
   end
 
   private
   def excercise_params
-    params.require(:excercise).permit :excercise_tittle, :questions,
-      :answers
+    params.require(:excercise).permit :excercise_name
+  end
+
+  def load_lesson
+    @lesson = Lesson.find_by id: params[:lesson_id]
   end
 
   def load_excercise
-    @excercise = Excercise.find_by id: params[:excercise_id]
+    @excercise = Excercise.find_by id: params[:id]
   end
-
-  # def load_lesson
-  #   @lesson = Lesson.find_by id: params[:id]
-  # end
-end
+ end
