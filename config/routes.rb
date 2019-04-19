@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   resources :courses, only: [:index, :show] do
     resources :reviews, only: [:index, :create, :new]
   end
-  
+
+
   scope shallow_prefix: "ucname" do
     resources :users, except: :index do
       resources :user_courses, shallow: true
@@ -34,9 +35,12 @@ Rails.application.routes.draw do
 
     scope shallow_prefix: "sname" do
       resources :courses do
-        resources :lessons, shallow: true
+        resources :lessons, shallow: true do
+          resources :excercises, shallow: true
+        end
       end
     end
+
     resources :searches, only: :index
     resources :users
   end
