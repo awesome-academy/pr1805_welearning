@@ -4,7 +4,7 @@ class Admin::LessonsController < Admin::BaseController
   before_action :load_course, only: [:new, :create, :destroy]
 
   def show
-    @excercises = @lesson.excercises.ordered_by_title.paginate page: params[:page], per_page: 15
+    @excercises = @lesson.excercises.ordered_by_name.paginate page: params[:page], per_page: 15
   end
 
   def new

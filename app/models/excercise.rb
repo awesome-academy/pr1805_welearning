@@ -1,12 +1,9 @@
 class Excercise < ApplicationRecord
-  has_many :user_course_lesson_questions
-  has_many :user_course_lesson_answers
+  has_many :questions, dependent: :destroy
+  has_many :answers, :through => :questions
   belongs_to :lesson
-
-  scope :ordered_by_title, -> { order excercise_title: :asc }
+  scope :ordered_by_name, -> { order excercise_name: :asc }
 
   validates :excercise_name, presence: true
-  # validates :excercise_question, presence: true
-  # validates :excercise_answers, presence: true
 end
 
