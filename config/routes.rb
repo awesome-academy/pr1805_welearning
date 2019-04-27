@@ -16,20 +16,34 @@ Rails.application.routes.draw do
   resources :account_activations, only: :edit
   resources :password_resets, except: :show
   resources :searches, only: :index
-  resources :courses, only: [:index, :show]
-  resources :users, except: :index do
-    resources :carts
+  resources :courses, only: [:index, :show] do
+    resources :reviews, only: [:index, :create, :new]
   end
+
+
+  scope shallow_prefix: "ucname" do
+    resources :users, except: :index do
+      resources :user_courses, shallow: true
+      resources :carts, shallow: true
+    end
+  end
+
+  resources :messages, only: [:create, :index], path: "chat"
 
   namespace :admin do
     root "dashboards#index"
 
-    resources :users, only: [:index, :edit, :update, :destroy]
     scope shallow_prefix: "sname" do
       resources :courses do
         resources :lessons, shallow: true
       end
     end
+
+    resources :lessons, shallow: true do
+      resources :excercises
+    end
+
     resources :searches, only: :index
+    resources :users
   end
 end
