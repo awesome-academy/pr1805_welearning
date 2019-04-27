@@ -1,0 +1,9 @@
+<fieldset>
+  <div class="form-inline">
+    <%= f.label :answer_title, "Cau tra loi" %>
+    <%= f.text_area :answer_content, cols: 80, rows: 1, class: "form-control mb-2" %>
+    <%= f.hidden_field :_destroy %> <br>
+    <%= link_to "Remove", "#", class: "remove_questions" %>
+  </div>
+  <br>
+</fieldset>
