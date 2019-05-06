@@ -2,8 +2,15 @@ class Admin::ExcercisesController < Admin::BaseController
 
   before_action :load_excercise, only: [:show, :edit, :destroy]
   before_action :load_lesson, only: [:create, :new, :show, :edit, :destroy]
+  before_action :load_question, only: [:create, :new, :show, :edit, :destroy]
+  before_action :load_answer, only: [:create, :new, :show, :edit, :destroy]
 
-  def index; end
+  def index;  end
+
+  def show
+    @questions = @excercise.questions.ordered_by_content.paginate page: params[:page], per_page: 15
+    @answers = Answer.order("RAND()").limit(10)
+  end
 
   def new
     @excercise = @lesson.excercises.build
@@ -13,7 +20,7 @@ class Admin::ExcercisesController < Admin::BaseController
     @excercise = @lesson.excercises.build excercise_params
     if @excercise.save
       flash[:success] = "Tạo bài tập thành công!"
-      redirect_to admin_sname_lesson @lesson
+      redirect_to admin_sname_lesson_path @lesson
     else
       flash[:danger] = "Bạn chưa điền đầy đủ thông tin bài tập"
       render :new
@@ -49,5 +56,13 @@ class Admin::ExcercisesController < Admin::BaseController
 
   def load_excercise
     @excercise = Excercise.find_by id: params[:id]
+  end
+
+  def load_question
+    @question = Question.find_by id: params[:question_id]
+  end
+
+  def load_answer
+    @answer = Answer.find_by id: params[:answer_id]
   end
  end
