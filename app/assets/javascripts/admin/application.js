@@ -72,4 +72,22 @@ $(document).on('click', 'form .add_fields', function(event) {
   return event.preventDefault();
 });
 
+$(document).on('click', 'form .add_questions', function(event) {
+  var regexp,time;
+  var tabElement = document.getElementById('excercise_hiden_tab');
+  time = parseInt(tabElement.value) + 1;
+  tabElement.value = time;
+  regexp = new RegExp($(this).data('id'), 'g');
+  $('.add_questions ').before($(this).data('questions').replace(regexp, time));
+  return event.preventDefault();
+});
 
+$(document).on('click', 'form .add_answers', function(event) {
+  var regexp,time;
+  var tabElement = document.getElementById('excercise_hiden_tab');
+  time = parseInt(tabElement.value) + 1;
+  tabElement.value = time;
+  regexp = new RegExp($(this).data('id'), 'g');
+  $('.add_answers ').before($(this).data('answers').replace(regexp, time));
+  return event.preventDefault();
+});
