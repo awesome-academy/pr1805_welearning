@@ -1,4 +1,4 @@
-<% provide :title, excercise.excercise_name %>
+<% provide :title, @excercise.excercise_name %>
 <h1 align="center">
   <%= @excercise.excercise_name %>
 </h1>
@@ -28,4 +28,4 @@
   <%= will_paginate(@questions,
     :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer,
     class: "mt-2 mr-2 pagination-sm d-flex justify-content-end")%>
-<%= link_to "Thêm Bài tập", new_admin_lesson_excercise_path(@course, @lesson, @excercise), class: "float-right btn btn-primary btn-sm mr-2 mt-2"%>
+<%= link_to "Thêm Bài tập", new_admin_lesson_excercise_path(@excercise), class: "float-right btn btn-primary btn-sm mr-2 mt-2"%>
