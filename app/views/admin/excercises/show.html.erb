@@ -1,4 +1,4 @@
-<% provide :title, excercise.excercise_name %>
+<% provide :title, @excercise.excercise_name %>
 <h1 align="center">
   <%= @excercise.excercise_name %>
 </h1>
@@ -18,14 +18,28 @@
       <th>Xóa</th>
     </tr>
   </thead>
-  <% if  %>
-      <ol >
-        <%= render "show" %>
-      </ol>
-  <% end %>
-
+  <tbody>
+    <tr>
+      <% if @excercise.questions.present? %>
+        <% @questions.each.with_index do |q| %>
+          <td><%= q.question_content %></td>
+          <td>
+            <% q.answers.each.with_index do |a| %>
+              <%= a.answer_content %>
+              <td><% a.is_correct %></q></td>
+            <% end %>
+          </td>
+          <td><%= link_to "Thay đổi", "#",
+            class: "btn btn-warning btn-sm" %></td>
+          <td><%= link_to "Xóa", "#", method: :delete,
+            class: "btn btn-danger btn-sm",
+            data: {confirm: "Xác nhận xóa bài tập ."} %></td>
+        <% end %>
+      <% end %>
+    </tr>
+  </tbody>
 </table>
   <%= will_paginate(@questions,
     :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer,
     class: "mt-2 mr-2 pagination-sm d-flex justify-content-end")%>
-<%= link_to "Thêm Bài tập", new_admin_lesson_excercise_path(@course, @lesson, @excercise), class: "float-right btn btn-primary btn-sm mr-2 mt-2"%>
+<%= link_to "Thêm Bài tập", new_admin_lesson_excercise_path(@excercise), class: "float-right btn btn-primary btn-sm mr-2 mt-2"%>
