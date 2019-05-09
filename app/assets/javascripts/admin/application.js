@@ -83,11 +83,12 @@ $(document).on('click', 'form .add_questions', function(event) {
 });
 
 $(document).on('click', 'form .add_answers', function(event) {
+  debugger
   var regexp,time;
   var tabElement = document.getElementById('excercise_hiden_tab');
   time = parseInt(tabElement.value) + 1;
   tabElement.value = time;
   regexp = new RegExp($(this).data('id'), 'g');
-  $('.add_answers ').before($(this).data('answers').replace(regexp, time));
+  $(this).before($(this).data('answers').replace(regexp, time));
   return event.preventDefault();
 });

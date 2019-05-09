@@ -9,7 +9,7 @@ module ApplicationHelper
       data: {id: id, contents: fields.gsub("\n", "")})
   end
 
-  def link_to_add_questions name, f, association
+  def link_to_add_questions name, f, association, method
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
@@ -19,7 +19,7 @@ module ApplicationHelper
       data: {id: id, questions: fields.gsub("\n", "")})
   end
 
-  def link_to_add_answers name, f, association
+  def link_to_add_answers name, f, association, method
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
@@ -28,4 +28,7 @@ module ApplicationHelper
     link_to(name, "#", class: "add_answers btn btn-primary",
       data: {id: id, answers: fields.gsub("\n", "")})
   end
+
+  # def click_to_delete_question name, association, method
+  #   delete_object = 
 end
