@@ -1,4 +1,4 @@
-<% provide :title, excercise.excercise_name %>
+<% provide :title, @excercise.excercise_name %>
 <h1 align="center">
   <%= @excercise.excercise_name %>
 </h1>
@@ -14,17 +14,33 @@
     <tr>
       <th>Câu hỏi</th>
       <th>Câu trả lời</th>
-      <th>Đáp án đúng</th>
-      <th>Xóa</th>
+      <th>Đúng/Sai</th>
     </tr>
   </thead>
-  <% if  %>
-      <ol >
-        <%= render "show" %>
-      </ol>
-  <% end %>
-
+  <tbody>
+    <tr>
+      <% if @excercise.questions.present? %>
+        <% @questions.each.with_index do |q| %>
+          <td><%= q.question_content %></td>
+          <td> 
+            <% q.answers.each.with_index do |a| %>
+              <%= a.answer_content %><br>
+            <% end %>
+          </td>
+          <td>
+            <% q.answers.each.with_index do |a| %>
+              <% if a.is_correct? %>
+                <%= "Đúng" %>
+              <% else %>
+                <%= "Sai" %><br>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+      <% end %>
+    </tr>
+  </tbody>
 </table>
-<%= will_paginate(@questions,
-  :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer,
-  class: "mt-2 mr-2 pagination-sm d-flex justify-content-end")%>
+  <%= will_paginate(@questions,
+    :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer,
+    class: "mt-2 mr-2 pagination-sm d-flex justify-content-end")%>
