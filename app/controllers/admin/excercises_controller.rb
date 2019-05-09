@@ -1,5 +1,5 @@
 class Admin::ExcercisesController < Admin::BaseController
-  before_action :load_excercise, only: [:show, :edit, :destroy]
+  before_action :load_excercise, only: [:show, :edit, :destroy, :update]
   before_action :load_lesson, only: [:create, :new, :show, :edit, :destroy]
   before_action :load_question, only: [:create, :new, :show, :edit, :destroy]
   before_action :load_answer, only: [:create, :new, :show, :edit, :destroy]
@@ -8,7 +8,6 @@ class Admin::ExcercisesController < Admin::BaseController
 
   def show
     @questions = @excercise.questions.ordered_by_content.paginate page: params[:page], per_page: 15
-    @answers = Answer.order("RAND()").limit(10)
   end
 
   def new
@@ -31,9 +30,10 @@ class Admin::ExcercisesController < Admin::BaseController
   def edit; end
 
   def update
+    @lesson = @excercise.lesson
     if @excercise.update_attributes excercise_update_params
       flash[:success] = "Cập nhật bài tập thành công!"
-      redirect_to admin_sname_lesson_path [:admin, :lesson, @excercise]
+      redirect_to admin_sname_lesson_path @lesson
     else
       flash[:danger] = "Bạn chưa điền đầy đủ thông tin bài tập"
       render :edit
@@ -48,13 +48,15 @@ class Admin::ExcercisesController < Admin::BaseController
 
   private
   def excercise_params
-    params.require(:excercise).permit(:excercise_name, questions_attributes:
-    [:id,:question_content, :_destroy, answers_attributes: [:id, :answer_content, :is_correct, :_destroy]])
+    params.require(:excercise).permit(:excercise_name, :id, questions_attributes:
+      [:id,:question_content, :_destroy, answers_attributes:
+        [:id, :answer_content, :is_correct, :_destroy]])
   end
 
   def excercise_update_params
-    params.require(:excercise).permit(:excercise_name, questions_attributes:
-    [:id,:question_content, :_destroy, answers_attributes: [:id, :answer_content, :is_correct, :_destroy]])
+    params.require(:excercise).permit(:excercise_name, :id, questions_attributes:
+      [:id,:question_content, :_destroy, answers_attributes:
+        [:id, :answer_content, :is_correct, :_destroy]])
   end
 
   def load_lesson

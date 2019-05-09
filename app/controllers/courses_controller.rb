@@ -13,10 +13,6 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params(:course).require.permit :name, :description, :price, :picture
-  end
-
-  def course_params
   	params.require(:course).permit :name, :buy_times, :rate, :price, :description
   end
 end
