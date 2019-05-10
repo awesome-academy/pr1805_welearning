@@ -18,9 +18,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <% if @excercise.questions.present? %>
-        <% @questions.each.with_index do |q| %>
+    <% if @excercise.questions.present? %>
+      <% @questions.each.with_index do |q| %>
+        <tr>
           <td><%= q.question_content %></td>
           <td> 
             <% q.answers.each.with_index do |a| %>
@@ -37,8 +37,8 @@
             <% end %>
           </td>
         <% end %>
-      <% end %>
-    </tr>
+      </tr>
+    <% end %>
   </tbody>
 </table>
   <%= will_paginate(@questions,
